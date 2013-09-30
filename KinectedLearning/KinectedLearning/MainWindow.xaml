@@ -1,0 +1,91 @@
+﻿<Window x:Class="KinectedLearning.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:kControls="clr-namespace:Coding4Fun.Kinect.Wpf.Controls;assembly=Coding4Fun.Kinect.Wpf"
+        Title="KinectedLearning: Human Body" Height="768" Width="1024"
+        Loaded="Window_Loaded" Style="{StaticResource KinectAppWindow}" Closed="Window_Closed">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#D9040833" Offset="0.2" />
+            <GradientStop Color="Chartreuse" Offset="1" />
+            <GradientStop Color="#E61747B2" Offset="0.8" />
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Viewbox>
+        <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRoot}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500*" MaxHeight="600"/>
+                <RowDefinition Height="100*" MaxHeight="200"/>
+                <RowDefinition Height="244*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="tbGameOverText" Style="{StaticResource GameOverText}" Text="Game Over !" />
+
+            <Grid x:Name="PointersGrid" Style="{StaticResource PointersGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                    <RowDefinition Height="50*" MaxHeight="70"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="130" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="AppTitle" Style="{StaticResource AppTitle}" Text="Human Body" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5"/>
+
+                <Rectangle x:Name="rectHead" Style="{StaticResource rectPointer}" Grid.Column="3" Grid.Row="1" />
+                <Rectangle x:Name="rectShoulder" Style="{StaticResource rectPointer}" Grid.Column="1" Grid.Row="2" />
+                <Rectangle x:Name="rectElbow" Style="{StaticResource rectPointer}" Grid.Column="3" Grid.Row="3" />
+                <Rectangle x:Name="rectStomach" Style="{StaticResource rectPointer}" Grid.Column="1" Grid.Row="4" />
+                <Rectangle x:Name="rectThigh" Style="{StaticResource rectPointer}" Grid.Column="3" Grid.Row="5" />
+                <Rectangle x:Name="rectKnee" Style="{StaticResource rectPointer}" Grid.Column="1" Grid.Row="6" />
+                <Rectangle x:Name="rectFoot" Style="{StaticResource rectPointer}" Grid.Column="3" Grid.Row="7" />
+
+                <Image Style="{StaticResource humanBody}" Stretch="Fill" Grid.Column="2" Grid.Row="1" Grid.RowSpan="7"/>
+
+                <kControls:HoverButton x:Name="khbHeadTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="4" Grid.Row="1" TimeInterval="1000" Click="khbHeadTarget_Click" />
+                <kControls:HoverButton x:Name="khbShoulderTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="0" Grid.Row="2" TimeInterval="1000" Click="khbShoulderTarget_Click" />
+                <kControls:HoverButton x:Name="khbElbowTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="4" Grid.Row="3" TimeInterval="1000" Click="khbElbowTarget_Click" />
+                <kControls:HoverButton x:Name="khbStomachTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="0" Grid.Row="4" TimeInterval="1000" Click="khbStomachTarget_Click" />
+                <kControls:HoverButton x:Name="khbThighTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="4" Grid.Row="5" TimeInterval="1000" Click="khbThighTarget_Click" />
+                <kControls:HoverButton x:Name="khbKneeTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="0" Grid.Row="6" TimeInterval="1000" Click="khbKneeTarget_Click" />
+                <kControls:HoverButton x:Name="khbFootTarget" Style="{StaticResource kinButtonTarget}" Grid.Column="4" Grid.Row="7" TimeInterval="1000" Click="khbFootTarget_Click" />
+            </Grid>
+
+            <StackPanel x:Name="spButtonMenu" Style="{StaticResource kinButtonMenu}" Grid.Row="1">
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Head" x:Name="khbHeadSource" TimeInterval="1000" Click="khbHeadSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Shoulder" x:Name="khbShoulderSource" TimeInterval="1000" Click="khbShoulderSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Elbow" x:Name="khbElbowSource" TimeInterval="1000" Click="khbElbowSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Stomach" x:Name="khbStomachSource" TimeInterval="1000" Click="khbStomachSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Thigh" x:Name="khbThighSource" TimeInterval="1000" Click="khbThighSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Knee" x:Name="khbKneeSource" TimeInterval="1000" Click="khbKneeSource_Click" />
+                <kControls:HoverButton Style="{StaticResource kinButtonMenuItem}" Content="Foot" x:Name="khbFootSource" TimeInterval="1000" Click="khbFootSource_Click" />
+            </StackPanel>
+            
+            <Canvas x:Name="TextCanvas">
+                
+            </Canvas>
+
+            <Canvas x:Name="GameCanvas">
+                <Image x:Name="handCursor" Style="{StaticResource HandCursor}" />
+                <Image x:Name="iHead" Style="{StaticResource kinImage}" Source="Images/head.png" />
+                <Image x:Name="iShoulder" Style="{StaticResource kinImage}" Source="Images/shoulder.png" />
+                <Image x:Name="iElbow" Style="{StaticResource kinImage}" Source="Images/elbow.png" />
+                <Image x:Name="iStomach" Style="{StaticResource kinImage}" Source="Images/stomach.png" />
+                <Image x:Name="iThigh" Style="{StaticResource kinImage}" Source="Images/thigh.png" />
+                <Image x:Name="iKnee" Style="{StaticResource kinImage}" Source="Images/knee.png" />
+                <Image x:Name="iFoot" Style="{StaticResource kinImage}" Source="Images/foot.png" />
+            </Canvas>
+        </Grid>
+    </Viewbox>
+</Window>
